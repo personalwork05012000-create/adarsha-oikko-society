@@ -202,7 +202,7 @@ function call(fn,...a){
   });
 }
 // GitHub Pages থেকে Apps Script API URL এখানে বসবে।
-window.AOS_API_URL = 'PASTE_YOUR_APPS_SCRIPT_EXEC_URL_HERE';
+window.AOS_API_URL = 'https://script.google.com/macros/s/AKfycbx2FbIw2iF-8lQVQ3YcuT9QKcNsm5ZP1rK51rjRRZlCoFwH4jAzB65LNwyMsPllFZvV/exec';
 function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(toast.h);toast.h=setTimeout(()=>t.classList.remove('on'),1900)}
 function copy(txt){const done=()=>toast('কপি হয়েছে ✓');
   function fb(){const a=document.createElement('textarea');a.value=txt;a.style.cssText='position:fixed;opacity:0';document.body.appendChild(a);a.select();try{document.execCommand('copy');done()}catch(e){toast('কপি করা যায়নি')}a.remove()}
