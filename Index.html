@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<base target="_top">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d5c46">
+<title>Adarsha Oikko Society</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --g:#0d5c46;--g2:#083f31;--gold:#c39a3b;--goldl:#e8d59a;--c:#fbf7ec;--b:#e8dec3;--t:#20302a;--m:#6d7a72;--red:#a3301f;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:#e9e2cd;font-family:'Inter','Noto Sans Bengali',system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--t);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.shell{max-width:480px;min-height:100vh;margin:0 auto;background:var(--c);position:relative;overflow-x:hidden}
+.hide{display:none!important}
+button{font-family:inherit;cursor:pointer}
+input::-ms-reveal,input::-ms-clear{display:none}
+/* login */
+.hero{background:linear-gradient(180deg,var(--g),var(--g2));color:#fff;padding:calc(44px + env(safe-area-inset-top)) 24px 78px;text-align:center;border-bottom:3px solid var(--gold)}
+.mono{width:80px;height:80px;margin:0 auto 14px;border-radius:50%;background:var(--c);display:grid;place-items:center;border:3px solid var(--gold);box-shadow:0 0 0 4px rgba(232,213,154,.25)}
+#llogo{display:block;width:92px;height:92px;margin:0 auto 14px;border-radius:50%;object-fit:contain;padding:8px;background:#fff;border:3px solid var(--gold)}
+.hero h1{margin:0;font-family:'Playfair Display','Inter',serif;font-size:27px;font-weight:700;letter-spacing:.2px;line-height:1.25}.hero p{margin:8px 0 0;color:var(--goldl);font-size:15px;line-height:1.6}
+.lcard{background:#fff;margin:-46px 16px 20px;border-radius:22px;padding:24px 20px;box-shadow:0 12px 32px rgba(8,63,49,.14);border:1px solid var(--b);position:relative}
+.lcard h2{margin:0;font-size:22px}.sub{margin:4px 0 18px;color:var(--m);font-size:15px}
+label{display:block;font-size:14px;font-weight:600;color:var(--g);margin-bottom:14px}
+input{display:block;width:100%;height:52px;margin-top:6px;padding:0 14px;border:1.5px solid var(--b);border-radius:14px;background:#fdfaf2;font-size:16px;font-family:inherit;color:var(--t);outline:0}
+input:focus{border-color:var(--gold);background:#fff}
+.btn{width:100%;height:54px;border:0;border-radius:14px;background:var(--g);color:#fff;font-size:17px;font-weight:600;margin-top:4px;border-bottom:3px solid var(--gold)}
+.btn:disabled{opacity:.6}
+.link{display:block;margin:14px auto 0;background:none;border:0;color:var(--g);font-size:15px;font-weight:600;padding:8px}
+.err{color:var(--red);font-size:14px;min-height:20px;margin-bottom:8px}
+.contact{margin-top:18px;padding-top:14px;border-top:1px dashed var(--b);text-align:center;color:var(--m);font-size:13.5px}
+/* shell */
+.top{position:sticky;top:0;z-index:20;background:var(--g);color:#fff;padding:calc(10px + env(safe-area-inset-top)) 14px 10px 16px;display:flex;align-items:center;gap:10px;border-bottom:3px solid var(--gold)}
+.top>div{flex:1;min-width:0}.top small{display:block;color:var(--goldl);font-size:12.5px;letter-spacing:.3px}
+.top b{display:block;font-size:17px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.top span{display:block;margin-top:1px;font-size:12.5px;color:var(--goldl);letter-spacing:.4px}
+.top button{width:46px;height:46px;border:1.5px solid var(--gold);border-radius:14px;background:rgba(255,255,255,.1);color:#fff;font-size:22px}
+#main{padding:14px 14px calc(30px + env(safe-area-inset-bottom))}
+.pt{margin:6px 2px 12px;font-size:21px;color:var(--g)}
+/* cards */
+.wel{background:linear-gradient(135deg,var(--g),var(--g2));color:#fff;border-radius:20px;padding:18px;margin-bottom:12px;border-bottom:3px solid var(--gold)}
+.wel small{color:var(--goldl)}.wel h2{margin:0;font-size:22px}.wel p{margin:6px 0 4px;color:#f0e9d0;font-size:14.5px}
+.chips{display:flex;flex-wrap:wrap;gap:0 8px;margin-top:10px;color:var(--goldl);font-size:13.5px}.chip+.chip:before{content:'·';margin-right:8px}.wel p.sl{margin:0 0 2px;color:var(--goldl);font-size:13.5px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.fc{background:#fff;border:1px solid var(--b);border-radius:16px;padding:12px;box-shadow:0 2px 8px rgba(8,63,49,.05);min-width:0}
+.fc i{font-style:normal;font-size:20px}.fc span{display:block;font-size:13px;color:var(--m);font-weight:500}
+.fc b{display:block;font-size:20px;color:var(--g);overflow-wrap:anywhere}.fc small{color:var(--m);font-size:12px}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.tile{border:1px solid var(--b);background:#fff;border-radius:16px;padding:10px 4px;font-size:13.5px;font-weight:600;color:var(--t);display:flex;flex-direction:column;align-items:center;gap:2px}
+.tile i{font-style:normal;font-size:22px}.tile.on{background:var(--g);color:#fff;border-color:var(--gold)}
+.pg{background:#fff;border:1px solid var(--b);border-radius:20px;padding:16px;margin-bottom:12px}
+.pg>h3{position:relative;display:flex;align-items:center;gap:8px;margin:0 0 4px;padding-bottom:12px;border-bottom:1px solid var(--b);font-size:15.5px;font-weight:700;color:var(--g);line-height:1.4}.pg>h3:after{content:'';position:absolute;left:0;bottom:-1px;width:46px;height:3px;border-radius:3px;background:var(--gold)}.unit{margin-left:auto;font-size:12px;font-weight:500;color:var(--m)}
+.kv{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #f1ead6}.kv:last-child{border:0}
+.kv span{flex:0 0 36%;color:var(--m);font-size:13.5px}.kv b{flex:1;min-width:0;font-weight:500;font-size:15px;text-align:right;overflow-wrap:anywhere}.kv.st{display:block}.kv.st span{display:block;margin-bottom:4px;font-size:12px;letter-spacing:.6px;text-transform:uppercase}.kv.st b{display:block;text-align:left;line-height:1.65}
+.cp{border:1px solid var(--g);background:#fff;color:var(--g);border-radius:10px;padding:6px 12px;font-size:13.5px;font-weight:600;min-height:36px}
+.note{background:#fbf3d9;border:1px solid #ecdba0;border-radius:14px;padding:10px 12px;font-size:14px;margin-bottom:12px}
+.sh{text-align:center;padding:10px 0 16px}.sh b{display:block;font-size:18px;color:var(--g2);line-height:1.4}.sh small{display:block;margin-top:4px;color:var(--m);font-size:14px}.st2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}.st2 div{background:#faf5e4;border:1px solid var(--b);border-radius:14px;padding:12px 8px;text-align:center}.st2 small{display:block;font-size:11px;letter-spacing:.8px;color:var(--m)}.st2 b{display:block;margin-top:2px;font-size:21px;color:var(--g);font-weight:700}.ad{display:flex;gap:12px;align-items:flex-start;padding:14px;background:#faf5e4;border:1px solid var(--b);border-radius:14px}.ad i{font-style:normal;font-size:20px;line-height:1.4}.ad small{display:block;font-size:11px;letter-spacing:.8px;color:var(--m)}.ad p{margin:2px 0 0;font-size:15px;line-height:1.65}
+.pay{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #f1ead6}.pay:last-child{border:0}
+.logo{position:relative;width:48px;height:48px;flex:none;border-radius:14px;background:#f3edd9;display:grid;place-items:center;font-weight:700;color:var(--g);overflow:hidden}
+.logo img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#fff;padding:4px}.logo i{font-style:normal}
+.pay div.in{flex:1;min-width:0}.pay small{display:block;color:var(--m);font-size:12.5px}.pay b{font-size:16px;overflow-wrap:anywhere}
+.prj{border:1px solid var(--b);border-radius:16px;overflow:hidden;margin-bottom:12px}
+.pimg{position:relative;height:130px;background:linear-gradient(135deg,var(--g),#2b7a62);display:grid;place-items:center;font-size:38px}
+.pimg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pb{padding:12px}.pb h4{margin:0 0 6px;font-size:16px}
+.badge{display:inline-block;padding:1px 10px;border-radius:99px;font-size:12.5px;font-weight:600;background:#e4f0ea;color:var(--g)}
+.badge.w{background:#fbf3d9;color:#8a6a12}.badge.d{background:#f7e1dc;color:var(--red)}
+.nt{border:1px solid var(--b);border-radius:16px;padding:12px;margin-bottom:10px}.nt h4{margin:0 0 4px;font-size:16px}
+.nt p{margin:0;color:#3d4b45;font-size:15px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;white-space:pre-wrap}
+.rm2{border:0;background:none;color:var(--g);font-weight:700;padding:8px 0 0;font-size:14.5px}
+.tx{background:#fff;border:1px solid var(--b);border-radius:18px;padding:14px;margin-bottom:12px}
+.txh{display:flex;justify-content:space-between;align-items:center;padding-bottom:8px;margin-bottom:6px;border-bottom:2px solid var(--gold)}
+.txh span{color:var(--m);font-size:14px}
+.row{display:flex;justify-content:space-between;gap:10px;padding:5px 0;font-size:15px}.row span{color:var(--m)}.row b{font-weight:600;white-space:nowrap}
+.tot{display:flex;justify-content:space-between;margin-top:6px;padding:9px 12px;background:#f5ecd0;border-radius:12px;font-weight:700;color:var(--g2)}
+.rmk{margin-top:8px;font-size:13.5px;color:var(--m);overflow-wrap:anywhere}.rmk p{margin:0;color:var(--t)}
+/* profile */
+.pf{position:relative;background:#fff;border:1px solid var(--b);border-radius:22px;text-align:center;padding:0 16px 18px;margin-bottom:12px;overflow:hidden}
+.pf:before{content:'';display:block;height:76px;margin:0 -16px;background:#f5ecd2;border-bottom:1px solid var(--b)}
+.ph{position:relative;width:96px;height:96px;margin:-50px auto 10px;border-radius:50%;border:3px solid var(--gold);background:#f5ecd2;color:var(--g);display:grid;place-items:center;font-size:34px;font-weight:700;overflow:hidden}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pf h2{margin:0;font-size:20px;color:var(--g2);line-height:1.4}.pf p{margin:2px 0 0;color:var(--m);font-size:14px}
+.rb{display:inline-block;margin-top:8px;padding:2px 14px;border-radius:99px;background:#f5ecd2;border:1px solid var(--gold);color:#7a5c14;font-size:13.5px;font-weight:600}
+.mini{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.mini div{background:#fff;border:1px solid var(--b);border-radius:14px;padding:8px 6px;text-align:center;min-width:0}
+.mini small{display:block;color:var(--m);font-size:11.5px;letter-spacing:.4px}.mini b{display:block;font-size:14px;color:var(--g2);overflow-wrap:anywhere}
+.pr{display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid #f1ead6}.pr:last-child{border:0}.pr.st{display:block}.pr.st span{display:block;margin-bottom:4px;font-size:12px;letter-spacing:.6px}.pr.st b{display:block;text-align:left;line-height:1.65}
+.pr span{color:var(--m);font-size:13.5px;flex:none}.pr b{text-align:right;font-weight:500;font-size:15px;min-width:0;overflow-wrap:anywhere}
+/* dashboard */
+.bal{background:linear-gradient(135deg,var(--g2),var(--g));color:#fff;border-radius:18px;padding:16px 18px;margin-bottom:12px;border-bottom:3px solid var(--gold)}
+.bal small{color:var(--goldl);font-weight:600;letter-spacing:1px}.bal b{display:block;font-size:34px}
+.ie{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.ic{background:#fff;border:1px solid var(--b);border-radius:16px;padding:10px 10px 6px;min-width:0}
+.ic h4{margin:0 0 6px;padding-bottom:6px;border-bottom:2px solid var(--gold);font-size:13.5px;color:var(--g)}
+.ir{padding:9px 0;border-bottom:1px solid #f1ead6}
+.ir span{display:block;color:var(--m);font-size:12px;line-height:1.4}.ir b{display:block;margin-top:1px;font-size:15px;font-weight:600}
+.ir.tt{background:#f5ecd0;margin:6px -4px 2px;padding:9px 8px;border-radius:10px;border:0}.ir.tt span{color:#6b5314;font-weight:600}.ir.tt b{color:var(--g2);font-weight:700}
+.tbl{padding:12px 4px 8px}.cap{margin:8px 6px 8px;font-size:12px;color:var(--m)}.tbl>h3{margin-left:6px;margin-right:6px}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:10.5px;font-variant-numeric:tabular-nums}
+th{background:#f5ecd0;color:#6b5314;padding:8px 2px;font-size:10.5px;font-weight:700;line-height:1.3}th small{display:block;font-size:9.5px;font-weight:500;color:#8a7020}
+td{padding:10px 2px;border-bottom:1px solid #f1ead6;text-align:center;overflow-wrap:anywhere;line-height:1.35}
+td.n,th.n{text-align:left;padding-left:6px;padding-right:4px}td.n{font-size:10.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}td:not(.n){overflow-wrap:normal;white-space:nowrap}
+td.d{background:#f8dcd6;color:var(--red);font-weight:600}td.g{background:#d9efdf;color:#1f6b3a;font-weight:600}td.f{color:#b5b9b6}
+tr.me td{background:#fdf4d8}tr.me td.d{background:#f8dcd6}tr.me td.g{background:#d9efdf}
+td.tt{font-weight:700;color:var(--g2)}.lg{display:flex;gap:10px;flex-wrap:wrap;margin:0 2px 12px;font-size:12px;color:var(--m)}.lg span{padding:2px 10px;border-radius:99px}.lg .d{background:#f8dcd6;color:var(--red)}.lg .g{background:#d9efdf;color:#1f6b3a}
+.empty{text-align:center;color:var(--m);padding:26px 12px;font-size:15px}.empty i{font-style:normal;display:block;font-size:34px}
+.sk{height:96px;border-radius:18px;margin-bottom:12px;background:linear-gradient(90deg,#efe8d3 25%,#faf5e6 50%,#efe8d3 75%);background-size:200% 100%;animation:sh 1.2s infinite}
+@keyframes sh{to{background-position:-200% 0}}
+/* overlay: bottom sheet + right drawer */
+.ov{position:fixed;inset:0;background:rgba(8,40,30,.5);z-index:50;display:flex;align-items:flex-end;justify-content:center}
+.bs{background:#fff;width:100%;max-width:480px;max-height:86vh;overflow:auto;border-radius:24px 24px 0 0;padding:10px 18px calc(22px + env(safe-area-inset-bottom))}
+.ov.side{align-items:stretch;justify-content:flex-end}
+.ov.side .bs{width:80%;max-width:320px;max-height:none;height:100%;border-radius:24px 0 0 24px;padding-top:calc(20px + env(safe-area-inset-top));border-left:3px solid var(--gold)}
+.ov.side .grab{display:none}
+.grab{width:42px;height:5px;border-radius:9px;background:var(--b);margin:0 auto 12px}
+.bs h3{margin:0 0 10px}.bs .full{white-space:pre-wrap;color:#33423b}
+.dh{padding:0 4px 14px;margin-bottom:8px;border-bottom:2px solid var(--gold)}.dh b{display:block;font-size:18px;color:var(--g2)}.dh small{color:var(--m)}
+.di{display:flex;align-items:center;gap:12px;width:100%;height:52px;border:0;background:none;border-radius:14px;padding:0 12px;font-size:16px;font-weight:600;color:var(--t);text-align:left}
+.di i{font-style:normal;font-size:21px;width:28px}.di.on{background:#e4f0ea;color:var(--g)}
+.dsep{height:1px;background:var(--b);margin:10px 4px}
+.di.out{color:var(--red)}
+#toast{position:fixed;left:50%;bottom:calc(30px + env(safe-area-inset-bottom));transform:translate(-50%,20px);background:var(--g2);color:#fff;padding:10px 18px;border-radius:99px;font-size:14.5px;opacity:0;pointer-events:none;transition:.25s;z-index:99;max-width:90%}
+#toast.on{opacity:1;transform:translate(-50%,0)}
+</style>
+</head>
+<body>
+<div class="shell">
+  <section id="login" class="hide">
+    <div class="hero">
+      <img id="llogo" class="hide" alt="">
+      <h1 id="lname">Adarsha Oikko Society</h1><p id="lslogan"></p>
+    </div>
+    <div class="lcard">
+      <div id="lform">
+        <h2>স্বাগতম</h2><p class="sub">আপনার সদস্য অ্যাকাউন্টে প্রবেশ করুন</p>
+        <label>Username<input id="u" autocomplete="username" autocapitalize="none" spellcheck="false"></label>
+        <label>Password<input id="p" type="password" autocomplete="current-password"></label>
+        <div class="err" id="lerr"></div>
+        <button class="btn" id="lbtn">Login</button>
+        <button class="link" id="fbtn">Forgot Password?</button>
+      </div>
+      <div id="fform" class="hide">
+        <h2>Password পুনরুদ্ধার</h2>
+        <div id="fs1"><p class="sub">পরিচয় যাচাই করুন</p>
+          <label>Username / Member ID<input id="fu" autocapitalize="none" spellcheck="false"></label>
+          <label>NID নম্বর<input id="fn" inputmode="numeric"></label>
+          <label>জন্ম তারিখ<input id="fd" type="date"></label>
+          <div class="err" id="ferr"></div><button class="btn" id="fv">যাচাই করুন</button></div>
+        <div id="fs2" class="hide"><p class="sub">নতুন Password দিন</p>
+          <label>নতুন Password<input id="n1" type="password" autocomplete="new-password"></label>
+          <label>আবার লিখুন<input id="n2" type="password" autocomplete="new-password"></label>
+          <div class="err" id="ferr2"></div><button class="btn" id="fr">Password সেট করুন</button></div>
+        <button class="link" id="fback">← Login-এ ফিরে যান</button>
+      </div>
+      <div class="contact" id="lcontact"></div>
+    </div>
+  </section>
+
+  <section id="app" class="hide">
+    <header class="top"><div><small>Adarsha Oikko Society</small><b id="hname"></b><span id="hid"></span></div><button id="menu" aria-label="Menu">☰</button></header>
+    <main id="main"></main>
+  </section>
+  <div id="ov" class="ov hide"><div class="bs"><div class="grab"></div><div id="bsb"></div></div></div>
+  <div id="toast"></div>
+</div>
+
+<script>
+const $=q=>document.querySelector(q),$$=q=>[...document.querySelectorAll(q)];
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const tk=n=>'৳'+Number(n||0).toLocaleString('en-US');
+const tn=n=>'৳'+Number(n||0);
+const money=v=>typeof v==='number'?tk(v):esc(v);
+const AWAY_LIMIT=30*60000; // মিনিমাইজ/অন্য অ্যাপে এতক্ষণ (ms) থাকলে তবেই Logout; ট্যাব/ব্রাউজার বন্ধ করলে সবসময় Logout
+/* token lives in sessionStorage only: it is wiped when the tab/app is closed */
+const store={get:k=>{try{return sessionStorage.getItem(k)}catch(e){return null}},set:(k,v)=>{try{sessionStorage.setItem(k,v)}catch(e){}},del:k=>{try{sessionStorage.removeItem(k)}catch(e){}}};
+try{localStorage.removeItem('aos_t')}catch(e){}
+let T=null,ME=null,cur='home',sec='summary',D={},NT=[];
+
+function call(fn,...a){
+  return new Promise((ok,no)=>{
+    const cb='__aos_cb_'+Date.now()+'_'+Math.random().toString(36).slice(2);
+    const s=document.createElement('script');
+    let done=false;
+    const finish=(fn,v)=>{if(done)return;done=true;try{delete window[cb]}catch(e){window[cb]=undefined}clearTimeout(tm);s.remove();fn(v)};
+    window[cb]=r=>{
+      if(r&&r.ok) finish(ok,r.data);
+      else finish(no,new Error((r&&r.error)||'সমস্যা হয়েছে'));
+    };
+    const qs=new URLSearchParams();
+    qs.set('api','1');
+    qs.set('fn',fn);
+    qs.set('args',JSON.stringify(a));
+    qs.set('callback',cb);
+    s.src=(window.AOS_API_URL||'')+'?'+qs.toString();
+    s.onerror=()=>finish(no,new Error('সংযোগে সমস্যা'));
+    document.head.appendChild(s);
+    const tm=setTimeout(()=>finish(no,new Error('সংযোগে সময় শেষ হয়েছে')),30000);
+  });
+}
+// GitHub Pages থেকে Apps Script API URL এখানে বসবে।
+window.AOS_API_URL = 'PASTE_YOUR_APPS_SCRIPT_EXEC_URL_HERE';
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(toast.h);toast.h=setTimeout(()=>t.classList.remove('on'),1900)}
+function copy(txt){const done=()=>toast('কপি হয়েছে ✓');
+  function fb(){const a=document.createElement('textarea');a.value=txt;a.style.cssText='position:fixed;opacity:0';document.body.appendChild(a);a.select();try{document.execCommand('copy');done()}catch(e){toast('কপি করা যায়নি')}a.remove()}
+  if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(txt).then(done,fb);else fb()}
+function sheet(h,side){$('#ov').classList.toggle('side',!!side);$('#bsb').innerHTML=h;$('#ov').classList.remove('hide')}
+function closeSheet(){$('#ov').classList.add('hide')}
+const empty=(m,i)=>`<div class="empty"><i>${i||'🗂️'}</i>${esc(m)}</div>`;
+const skel='<div class="sk"></div><div class="sk"></div><div class="sk"></div>';
+
+/* ---------- session ---------- */
+function showLogin(msg){T=null;ME=null;D={};store.del('aos_t');closeSheet();$('#app').classList.add('hide');$('#login').classList.remove('hide');$('#lform').classList.remove('hide');$('#fform').classList.add('hide');$('#lerr').textContent=msg||''}
+function applyBundle(b){ME=b.me;D={home:b.home,profile:b.profile,statement:b.statement,dashboard:b.dashboard};$('#hname').textContent=ME.name;$('#hid').textContent=ME.id}
+function enter(){$('#login').classList.add('hide');$('#app').classList.remove('hide');go('home')}
+function sessionLost(e){if(/SESSION/.test(e.message)){showLogin('সেশন শেষ হয়েছে, আবার Login করুন');return true}return false}
+async function doLogin(){const b=$('#lbtn');$('#lerr').textContent='';b.disabled=true;b.textContent='অপেক্ষা করুন...';
+  try{const r=await call('loginUser',$('#u').value,$('#p').value);T=r.token;store.set('aos_t',T);applyBundle(r.bundle);$('#p').value='';enter()}
+  catch(e){$('#lerr').textContent=e.message}finally{b.disabled=false;b.textContent='Login'}}
+$('#lbtn').onclick=doLogin;$('#p').onkeydown=e=>{if(e.key==='Enter')doLogin()};
+$('#fbtn').onclick=()=>{$('#lform').classList.add('hide');$('#fform').classList.remove('hide');$('#fs1').classList.remove('hide');$('#fs2').classList.add('hide')};
+$('#fback').onclick=()=>{$('#fform').classList.add('hide');$('#lform').classList.remove('hide')};
+let RT=null;
+$('#fv').onclick=async()=>{const b=$('#fv');$('#ferr').textContent='';b.disabled=true;
+  try{RT=(await call('verifyIdentity',$('#fu').value,$('#fn').value,$('#fd').value)).resetToken;$('#fs1').classList.add('hide');$('#fs2').classList.remove('hide')}
+  catch(e){$('#ferr').textContent=e.message}finally{b.disabled=false}};
+$('#fr').onclick=async()=>{const b=$('#fr'),p=$('#n1').value;$('#ferr2').textContent='';
+  if(p!==$('#n2').value){$('#ferr2').textContent='দুটি Password মিলছে না';return}
+  b.disabled=true;try{await call('resetPassword',RT,p);$('#u').value=$('#fu').value;$('#n1').value=$('#n2').value='';$('#fback').click();toast('Password পরিবর্তন হয়েছে। Login করুন')}
+  catch(e){$('#ferr2').textContent=e.message}finally{b.disabled=false}};
+
+/* অ্যাপ ছেড়ে বের হলে (অন্য অ্যাপে গেলে/ট্যাব লুকালে) কিছুক্ষণ পর স্বয়ংক্রিয় Logout */
+let hiddenAt=0;
+document.addEventListener('visibilitychange',()=>{
+  if(document.hidden){hiddenAt=Date.now();return}
+  if(T&&hiddenAt&&Date.now()-hiddenAt>AWAY_LIMIT){const t=T;showLogin('অনেকক্ষণ অ্যাপ ব্যবহার না করায় Logout হয়েছে। আবার Login করুন');call('logout',t).catch(()=>{})}
+  hiddenAt=0});
+
+/* ---------- navigation (all data already loaded, so pages open instantly) ---------- */
+const NAV=[['home','🏠','Home'],['profile','👤','Profile'],['statement','📄','Statement'],['dashboard','📊','Dashboard']];
+function go(p){cur=p;window.scrollTo(0,0);({home:rHome,profile:rProfile,statement:rStatement,dashboard:rDash})[p]()}
+function view(key,paint){const x=D[key];
+  if(!x){$('#main').innerHTML=skel;return}
+  if(!x.ok){$('#main').innerHTML=empty(x.error,'⚠️')+'<button class="btn" id="retry">আবার চেষ্টা করুন</button>';$('#retry').onclick=refresh;return}
+  paint(x.data)}
+async function refresh(){$('#main').innerHTML=skel;
+  try{applyBundle(await call('getBundle',T,true));go(cur)}
+  catch(e){if(!sessionLost(e))$('#main').innerHTML=empty(e.message,'⚠️')+'<button class="btn" id="retry">আবার চেষ্টা করুন</button>',$('#retry').onclick=refresh}}
+
+/* ---------- home ---------- */
+const fc=(i,l,v,s)=>`<div class="fc"><i>${i}</i><span>${l}</span><b>${tk(v)}</b><small>${s}</small></div>`;
+const box=(t,b)=>`<section class="pg"><h3>${t}</h3>${b}</section>`;
+const kv=(l,v,cp,st)=>v===''||v==null?'':`<div class="kv${st?' st':''}"><span>${l}</span><b>${money(v)}</b>${cp?`<button class="cp" data-copy="${esc(v)}">কপি</button>`:''}</div>`;
+const TILES=[['summary','🏛️','Society'],['pay','💳','Payment'],['projects','🌾','Projects'],['notices','🔔','Notices'],['bank','🏦','Bank'],['contact','📞','Contact']];
+function rHome(){view('home',h=>{const c=h.content,s=h.summary,so=c.society||{};
+  $('#main').innerHTML=`<div class="wel"><small>Welcome,</small><h2>${esc(ME.name)}</h2><p>${esc(so.society_name||'')}</p>${so.society_slogan?`<p class="sl">${esc(so.society_slogan)}</p>`:''}<div class="chips"><span class="chip">${esc(ME.id)}</span>${ME.role?`<span class="chip">${esc(ME.role)}</span>`:''}</div></div>
+  <div class="tiles">${TILES.map(t=>`<button class="tile" data-sec="${t[0]}"><i>${t[1]}</i>${t[2]}</button>`).join('')}</div><div id="panel"></div>`;
+  $$('.tile').forEach(b=>b.onclick=()=>{sec=b.dataset.sec;panel(h)});panel(h)})}
+function panel(h){const c=h.content,so=c.society||{},bk=c.bank||{},ct=c.contact||{};$$('.tile').forEach(b=>b.classList.toggle('on',b.dataset.sec===sec));let x='';
+  if(sec==='summary'){const tm=so.total_members==null||so.total_members===''?'':String(so.total_members);
+    x=`<div class="sh"><b>${esc(so.society_name||'')}</b>${so.society_slogan?`<small>${esc(so.society_slogan)}</small>`:''}</div>`+
+    ((so.established||tm)?`<div class="st2">${so.established?`<div><small>ESTABLISHED</small><b>${esc(so.established)}</b></div>`:''}${tm?`<div><small>TOTAL MEMBERS</small><b>${esc(tm)}</b></div>`:''}</div>`:'')+
+    (ct.address?`<div class="ad"><i>📍</i><div><small>ADDRESS</small><p>${esc(ct.address)}</p></div></div>`:'')}
+  if(sec==='pay')x=(h.note?`<div class="note">${esc(h.note)}</div>`:'')+c.pay.map(p=>`<div class="pay"><div class="logo"><i>${esc(p.name[0])}</i>${p.logo?`<img src="${esc(p.logo)}" alt="" onerror="this.remove()">`:''}</div><div class="in"><small>${esc(p.name)} · ${p.label}</small><b>${esc(p.value)}</b></div><button class="cp" data-copy="${esc(p.value)}">কপি</button></div>`).join('');
+  if(sec==='projects')x=c.projects.map(p=>{const st=String(p.status||''),cl=/run/i.test(st)?'':/wait|pend/i.test(st)?'w':'d';
+    return `<div class="prj"><div class="pimg">🌱${p.image_url?`<img src="${esc(p.image_url)}" alt="" onerror="this.remove()">`:''}</div><div class="pb"><h4>${esc(p.name)}</h4>${st?`<span class="badge ${cl}">${esc(st)}</span>`:''}${kv('Investment',p.investment)}${kv('Profit',p.profit)}</div></div>`}).join('');
+  if(sec==='notices'){NT=c.notices;x=NT.map((n,i)=>`<div class="nt"><h4>🔔 ${esc(n.title||'Notice')}</h4><p>${esc(n.text||'')}</p>${(n.text||'').length>110?`<button class="rm2" data-nt="${i}">Read More →</button>`:''}</div>`).join('')}
+  if(sec==='bank')x=(bk.bank_logo_url?`<div class="pay"><div class="logo"><img src="${esc(bk.bank_logo_url)}" alt="" onerror="this.remove()"></div></div>`:'')+[kv('Bank',bk.bank_name),kv('Account Name',bk.account_name),kv('Account No',bk.account_number),kv('Branch',bk.branch),kv('Routing No',bk.routing_no)].join('');
+  if(sec==='contact')x=[kv('Mobile',ct.mobile,0,1),kv('Email',ct.email,0,1),kv('Address',ct.address,0,1),kv('Facebook',ct.facebook,0,1)].join('');
+  const T2={summary:'Society Summary',pay:'Payment Methods',projects:'Projects',notices:'Notices',bank:'Bank Information',contact:'Contact'};
+  $('#panel').innerHTML=box(T2[sec],x.trim()||empty('এই অংশে কোনো তথ্য নেই'))}
+
+/* ---------- profile ---------- */
+function rProfile(){view('profile',p=>{const f=p.f||{};
+  const S=(t,ic,rows)=>{const r=rows.filter(x=>x[1]).map(x=>`<div class="pr${x[2]?' st':''}"><span>${x[0]}</span><b>${esc(x[1])}</b></div>`).join('');return r?`<section class="pg"><h3>${ic} ${t}</h3>${r}</section>`:''};
+  $('#main').innerHTML=`<div class="pf"><div class="ph">${esc((p.name||'?')[0])}${p.photo?`<img src="${esc(p.photo)}" alt="" onerror="this.remove()">`:''}</div><h2>${esc(p.name)}</h2>${p.role?`<span class="rb">${esc(p.role)}</span>`:''}</div>
+  <div class="mini">${[['MEMBER ID',f.id],['USERNAME',f.username],['STATUS',f.status]].filter(x=>x[1]).map(x=>`<div><small>${x[0]}</small><b>${esc(x[1])}</b></div>`).join('')}</div>`+
+  S('যোগাযোগের তথ্য','📞',[['মোবাইল নম্বর',f.mobile,1],['ইমেইল',f.email,1],['স্থায়ী ঠিকানা',f.address,1]])+
+  S('ব্যক্তিগত তথ্য','🪪',[['পিতার নাম',f.father],['মাতার নাম',f.mother],['জন্ম তারিখ',f.dob],['রক্তের গ্রুপ',f.blood],['নমিনি (মনোনীত)',f.nominee],['জাতীয় পরিচয়পত্র (NID)',f.nid],['যোগদানের তারিখ',f.join]])})}
+
+/* ---------- statement ---------- */
+const row=(l,v)=>`<div class="row"><span>${l}</span><b>${tk(v)}</b></div>`;
+function rStatement(){view('statement',s=>{const m=s.summary;
+  $('#main').innerHTML=`<h2 class="pt">Statement</h2><div class="grid2">${fc('💰','Total Deposit',m.deposit,'সর্বমোট')}${fc('🗓️','Total Fee',m.fee,'মাসিক চাঁদা')}${fc('⚠️','Total Fine',m.fine,'জরিমানা')}${fc('🎁','Other Deposit',m.other,'অন্যান্য জমা')}</div>`+
+  (s.tx.length?s.tx.map(t=>`<article class="tx"><div class="txh"><b>Payment</b><span>${esc(t.date)}</span></div>${t.fee?row('Monthly Fee',t.fee):''}${t.fine?row('Fine',t.fine):''}${t.other?row('Other Deposit'+(t.otherLabel?' ('+esc(t.otherLabel)+')':''),t.other):''}<div class="tot"><span>Total</span><span>${tk(t.total)}</span></div>${t.mode?`<div class="row" style="margin-top:6px"><span>Payment Mode</span><b>${esc(t.mode)}</b></div>`:''}${t.remark?`<div class="rmk">Remark<p>${esc(t.remark)}</p></div>`:''}</article>`).join(''):empty('কোনো লেনদেন পাওয়া যায়নি','📄'))+
+  (s.dueCount?`<div class="note">⏳ ${s.dueCount} টি এন্ট্রি Due অবস্থায় আছে</div>`:'')})}
+
+/* ---------- dashboard ---------- */
+const FEE_STD=3000; // এর নিচে জমা দিলে ঘর সবুজ
+const ir=a=>a.map((x,i)=>`<div class="ir ${x.t&&i===a.length-1?'tt':''}"><span>${esc(x.l)}</span><b>${tk(x.a)}</b></div>`).join('');
+const nn=n=>Number(n||0);
+const mh=m=>{const p=String(m).split(' ');return `${esc(p[0])}<small>${esc(p[1]||'')}</small>`};
+function rDash(){view('dashboard',d=>{
+  const now=new Date(),nk=now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0');
+  const bal=`<div class="bal"><small>💰 BALANCE</small><b>${d.balance==null?'—':tk(d.balance)}</b></div>`;
+  const ie=d.income.length||d.expense.length?`<div class="ie"><div class="ic"><h4>📥 Income Sources</h4>${ir(d.income)}</div><div class="ic"><h4>📤 Expense Sources</h4>${ir(d.expense)}</div></div>`:'';
+  const mem=d.members.length?`<section class="pg tbl"><h3>👥 Members Summary Dashboard</h3><p class="cap">Amount in ৳</p><div class="tw"><table><colgroup><col style="width:8%"><col style="width:30%"><col style="width:15%"><col style="width:14%"><col style="width:16%"><col style="width:17%"></colgroup>
+  <thead><tr><th>SL</th><th class="n">Name</th><th>Total Fee</th><th>Total Fine</th><th>Others Deposit</th><th>Total</th></tr></thead><tbody>
+  ${d.members.map((m,i)=>`<tr class="${m.mine?'me':''}"><td>${i+1}</td><td class="n">${esc(m.name)}</td><td>${nn(m.fee)}</td><td>${nn(m.fine)}</td><td>${nn(m.other)}</td><td class="tt">${nn(m.total)}</td></tr>`).join('')}</tbody></table></div></section>`:'';
+  const grids=d.grid.slice().reverse().map(g=>`<section class="pg tbl"><h3>🗓️ ${esc(g.title)}</h3><p class="cap">Amount in ৳</p><div class="tw"><table><colgroup><col style="width:5%"><col style="width:29%">${g.months.map(()=>'<col style="width:9%">').join('')}<col style="width:12%"></colgroup>
+  <thead><tr><th>SL</th><th class="n">Name</th>${g.months.map(m=>`<th>${mh(m)}</th>`).join('')}<th>Total</th></tr></thead><tbody>
+  ${g.rows.map((r,i)=>`<tr class="${r.mine?'me':''}"><td>${i+1}</td><td class="n">${esc(r.name)}</td>${g.months.map((m,k)=>{const v=r.cells[k];return v>=FEE_STD?`<td>${nn(v)}</td>`:v>0?`<td class="g">${nn(v)}</td>`:(g.ym[k]<=nk?`<td class="d">0</td>`:`<td class="f">—</td>`)}).join('')}<td class="tt">${nn(r.total)}</td></tr>`).join('')}</tbody></table></div></section>`).join('');
+  const lg=d.grid.length?`<div class="lg"><span class="d">০ = বকেয়া</span><span class="g">${FEE_STD} টাকার কম জমা</span></div>`:'';
+  $('#main').innerHTML=`<h2 class="pt">Society Dashboard</h2>`+bal+ie+mem+grids+lg+(!d.income.length&&!d.members.length&&!d.grid.length?empty('Dashboard-এ কোনো তথ্য নেই','📊'):'')})}
+
+/* ---------- menu (options button, right side) ---------- */
+function drawer(){sheet(`<div class="dh"><b>${esc(ME.name)}</b><small>${esc(ME.id)}</small></div>
+  ${NAV.map(n=>`<button class="di ${cur===n[0]?'on':''}" data-go="${n[0]}"><i>${n[1]}</i>${n[2]}</button>`).join('')}
+  <div class="dsep"></div>
+  <button class="di" id="mpw"><i>🔑</i>Password পরিবর্তন</button>
+  <button class="di" id="mrf"><i>🔄</i>Refresh</button>
+  <button class="di out" id="mlo"><i>🚪</i>Logout</button>`,true)}
+$('#menu').onclick=drawer;
+document.addEventListener('click',e=>{const t=e.target;
+  if(t.id==='ov')closeSheet();
+  const g=t.closest('[data-go]');if(g){closeSheet();go(g.dataset.go);return}
+  const c=t.closest('[data-copy]');if(c)copy(c.dataset.copy);
+  const n=t.closest('[data-nt]');if(n){const x=NT[+n.dataset.nt];sheet(`<h3>🔔 ${esc(x.title||'Notice')}</h3><div class="full">${esc(x.text)}</div><button class="btn" style="margin-top:14px" onclick="closeSheet()">বন্ধ করুন</button>`)}
+  const bt=t.closest('button');const id=bt&&bt.id;
+  if(id==='mrf'){closeSheet();refresh()}
+  if(id==='mlo'){const tk0=T;showLogin();call('logout',tk0).catch(()=>{})}
+  if(id==='mpw')sheet(`<h3>Password পরিবর্তন</h3><label>বর্তমান Password<input id="o0" type="password"></label><label>নতুন Password<input id="o1" type="password"></label><div class="err" id="oerr"></div><button class="btn" id="osv">সংরক্ষণ করুন</button>`);
+  if(id==='osv'){bt.disabled=true;call('changePassword',T,$('#o0').value,$('#o1').value).then(()=>{closeSheet();toast('Password পরিবর্তন হয়েছে')}).catch(er=>{if(!sessionLost(er)){$('#oerr').textContent=er.message;bt.disabled=false}})}
+});
+
+/* ---------- boot ---------- */
+(async function(){
+  call('getPublicInfo').then(i=>{$('#lname').textContent=i.name;$('#lslogan').textContent=i.slogan;
+    if(i.logo){const l=$('#llogo');l.onload=()=>l.classList.remove('hide');l.src=i.logo}
+    $('#lcontact').innerHTML=[i.mobile?'📞 '+esc(i.mobile):'',i.email?'✉️ '+esc(i.email):''].filter(Boolean).join('<br>')||''}).catch(()=>{});
+  const t=store.get('aos_t');
+  if(t){T=t;$('#app').classList.remove('hide');$('#main').innerHTML=skel;
+    try{applyBundle(await call('getBundle',t,false));go('home');return}catch(e){showLogin();return}}
+  $('#login').classList.remove('hide');
+})();
+</script>
+</body>
+</html>
